@@ -1,4 +1,5 @@
 const express = require ('express');
+const cors = require('cors');
 const app = express();
 const PORT = 3003;
 const HTTP_STATUSES = {
@@ -9,10 +10,15 @@ const HTTP_STATUSES = {
 	BAD_REQUEST_400: 400,
 	NOT_FOUND_404: 404
 }
-const jsonBodyMiddleware = express.json()
-app.use(jsonBodyMiddleware)
+const jsonBodyMiddleware = express.json();
+app.use(jsonBodyMiddleware);
+app.use(cors());
 
 const db = {
+	text: [
+		'Hi from backEnd',
+		'Another text from backEnd'
+	],
 	users: [
 		{id: 1, name: 'Valera', time: '15'},
 		{id: 2, name: 'Katia', time: '20'},
@@ -21,6 +27,10 @@ const db = {
 
 app.get('/', (req, res) => {
 	res.json({message: 'server is working'})
+});
+
+app.get('/text/', (req, res) => {
+	res.json(db.text)
 });
 
 app.get('/users/', (req, res) => {
