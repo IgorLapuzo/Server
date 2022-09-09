@@ -15,15 +15,23 @@ app.use(jsonBodyMiddleware);
 app.use(cors());
 
 const db = {
+
 	text: [
 		'Hi from backEnd',
 		'Another text from backEnd'
-	],
-	users: [
-		{id: 1, name: 'Valera', time: '15'},
-		{id: 2, name: 'Katia', time: '20'},
 	]
+	
+  	results: [
+    	{id: a1,
+     	userResults: [{speed: 185, precision: 85},
+       	 			{speed: 125, precision: 79}]
+   	 	},
+   	 	{id: b1,
+      	userResults: [{speed: 100,precision: 99}]
+    	}
+  	]
 }
+
 
 app.get('/', (req, res) => {
 	res.json({message: 'server is working'})
@@ -31,10 +39,6 @@ app.get('/', (req, res) => {
 
 app.get('/text/', (req, res) => {
 	res.json(db.text)
-});
-
-app.get('/users/', (req, res) => {
-	res.json(db.users)
 });
 
 app.get('/users/:id', (req, res) => {
